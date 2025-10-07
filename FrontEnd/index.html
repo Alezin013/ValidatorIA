@@ -7,28 +7,58 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <header>
+        <img src="" alt="">
+        <nav>
+            
+        </nav>
+    </header>
+    <main>
+        <section>
+            <img src="" alt=""> <!-- imagem maneira-->
+        </section>
+        <section>
+
+        </section>
+    </main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <div class="container">
         <h1>ValidatorIA</h1>
         <p>Valide seu código HTML, CSS ou JavaScript abaixo:</p>
         <!-- Formulário tradicional -->
-        <form id="validator-form">
-            <textarea id="code-input" placeholder="Cole seu código aqui..." rows="12"></textarea>
-            <div class="options">
-                <label><input type="radio" name="type" value="html" checked> HTML</label>
-                <label><input type="radio" name="type" value="css"> CSS</label>
-                <label><input type="radio" name="type" value="js"> JavaScript</label>
-            </div>
-            <button type="submit">Validar</button>
-        </form>
         <hr>
         <!-- Novo campo para upload de arquivo -->
         <form id="file-form">
-            <label for="file-input">Ou selecione um arquivo para análise por IA:</label>
+            <label for="file-input">Selecione um arquivo</label>
             <input type="file" id="file-input" accept=".html,.css,.js">
-            <button type="submit">Analisar com IA</button>
+            <button type="submit">Analisar</button>
         </form>
-        <div id="result" class="result"></div>
     </div>
+    <div class="nota">
+
+    </div>
+    <div class="ranking">
+        <!-- aqui vai aparecer um ranking de 1 a 10 onde no 11 lugar vai 
+         aparecer exatamente onde esta o seu codigo -->
+    </div>
+    <footer>
+
+    </footer>
     <script src="script.js"></script>
 </body>
 </html>
