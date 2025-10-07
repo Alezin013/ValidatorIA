@@ -7,7 +7,9 @@ document.getElementById('validator-form').addEventListener('submit', function(e)
     const resultDiv = document.getElementById('result');
     resultDiv.textContent = 'Validando...';
 
-    // Exemplo de requisição para o backend tradicional
+    // Altere o endereço abaixo para o endereço/porta onde seu backend está rodando
+    // Exemplo: se o backend roda em http://localhost:5500, mantenha assim
+    // Se rodar em outra porta, ajuste para http://localhost:PORTA/api/validate
     fetch('http://localhost:5500/api/validate', {
         method: 'POST',
         headers: {
@@ -57,7 +59,7 @@ document.getElementById('file-form').addEventListener('submit', function(e) {
         resultDiv.textContent = 'Analisando com IA...';
 
         // Envia o conteúdo do arquivo para o backend IA
-    fetch('http://localhost:5500/api/ia-analyze', {
+        fetch('http://localhost:5000/api/ia-analyze', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
