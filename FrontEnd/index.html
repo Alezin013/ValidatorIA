@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ValidatorIA - Validador de Código</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>ValidatorIA</h1>
+        <p>Valide seu código HTML, CSS ou JavaScript abaixo:</p>
+        <!-- Formulário tradicional -->
+        <form id="validator-form">
+            <textarea id="code-input" placeholder="Cole seu código aqui..." rows="12"></textarea>
+            <div class="options">
+                <label><input type="radio" name="type" value="html" checked> HTML</label>
+                <label><input type="radio" name="type" value="css"> CSS</label>
+                <label><input type="radio" name="type" value="js"> JavaScript</label>
+            </div>
+            <button type="submit">Validar</button>
+        </form>
+        <hr>
+        <!-- Novo campo para upload de arquivo -->
+        <form id="file-form">
+            <label for="file-input">Ou selecione um arquivo para análise por IA:</label>
+            <input type="file" id="file-input" accept=".html,.css,.js">
+            <button type="submit">Analisar com IA</button>
+        </form>
+        <div id="result" class="result"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
