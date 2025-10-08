@@ -9,6 +9,24 @@ body {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* parte de trás da barra */
+::-webkit-scrollbar-track {
+  background: #0B0F19; /* cor do fundo */
+  border-radius: 10px;
+}
+
+/* o "thumb" — parte que você arrasta */
+::-webkit-scrollbar-thumb {
+  background: #3264fe; 
+  border-radius: 10px;
+}
+
+
 html {
     scroll-behavior: smooth;
 }
