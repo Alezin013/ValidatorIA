@@ -69,24 +69,67 @@
                 <!-- FIM DO FORM DO ALE  -->
             </div>
         </section>
-       
+
         <section id="dashboard">
             <div class="esquerda">
                 <article>
                     <!-- Local onde vamos colocar a nota e o pq -->
                 </article>
-                <article>
-                    <!-- GRAFICO DE PIZZA obs: aprender a fazer isso-->
+                <article class="graficos">
+                    <div class="grafico-pol">
+                        <canvas id="grafico-polar" style="width: 200px; height: 200px;"></canvas>
+                    </div>
+                    <div class="grafico-piz">
+                        <canvas id="grafico-pizza" style="width: 200px; height: 200px;"></canvas>
+                    </div>
                 </article>
             </div>
             <div class="direita">
-                <!-- RANKING DE NOTAS -->
+                <table>
+                    <tr>
+                        <th>Ranking</th>
+                        <th>Nome Arquivo</th>
+                        <th>Nota</th>
+                    </tr>
+                    <tr>
+                        <td><i class="fa-solid fa-crown"></i></td>
+                        <td></td>   <!-- APRENDER A COLOCAR O NOME DA EQUIPE AQUI -->
+                        <td></td>   <!-- APRENDER A COLOCAR A NOTA DA EQUIPE AQUI -->
+                    </tr>
+                    <tr>
+                        <td>2°</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>3°</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>4°</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>5°</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>6°</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
             </div>
         </section>
     </main>
     <footer>
         <p>&copy;Todos os arquivos reservados a:</p>
     </footer>
+    <script src="/FrontEnd/js/grafico-polar.js"></script>
+    <script src="/FrontEnd/js/grafico-pizza.js"></script>
     <script src="/FrontEnd/js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </body>
