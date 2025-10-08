@@ -91,7 +91,6 @@ section{
     border-radius: 30px;
     display: flex;
     justify-content: space-between;
-
 }
 
 .container > .esquerda-container{
@@ -208,6 +207,7 @@ section{
     box-shadow: rgba(149, 157, 165, 0.4) 0px 8px 24px;
 }
 
+/* COMEÇO DA DASHBOARD */
 
 
 
@@ -224,3 +224,108 @@ section{
 
 
 
+
+
+
+
+
+/* COMEÇO DO RANKING */
+#ranking{
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    box-shadow: none;
+}
+
+#ranking > .ranking-container{
+    width: 100%;
+    height: 100%;
+    border-radius: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* COMEÇO FOOTER */
