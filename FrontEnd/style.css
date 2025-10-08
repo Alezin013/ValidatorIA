@@ -9,7 +9,6 @@ body {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
-
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -29,7 +28,10 @@ body {
 
 html {
     scroll-behavior: smooth;
+    scroll-padding-top: 100px;
 }
+
+/* header */
 
 header{
     width: 100vw;
@@ -46,6 +48,12 @@ header{
 header > nav {
     height: 50px;
     width: 30%;
+    display: flex;
+    align-items: center;
+}
+
+header > h3 {
+    margin: 0;
     display: flex;
     align-items: center;
 }
@@ -67,9 +75,16 @@ header > nav > ul > li > a {
     color: white;
     font-weight: bold;
     position: relative;
+    transition: font-size 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+header > nav > ul > li > a:hover{
+    font-size: larger;
+    color: #3264fe;
 }
 
 /* fim do header */
+/* começo da main */
 
 main {
     margin-top: 50px;
@@ -89,6 +104,8 @@ section{
     height: 500px;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin-top: 25px;
+    margin-bottom: 25px;
 }
 
 #inicio {
@@ -206,8 +223,6 @@ section{
     color: #3265febb;
 }
 
-
-
 .container > .direita-container > form > textarea:focus{
     outline: none;
     color: #3264fe;
@@ -225,9 +240,11 @@ section{
     box-shadow: rgba(149, 157, 165, 0.4) 0px 8px 24px;
 }
 
-/* COMEÇO DA DASHBOARD */
+/* fim da main */
+/* começo do dashboard */
 
-/* COMEÇO DO RANKING */
+/* fim do dashboard */
+/* começo do ranking */
 
 #ranking{
     background-color: transparent;
@@ -257,8 +274,8 @@ section{
 
 .podio-ranking > .esquerda-podio{
     width: calc(100%/3);
-    height: 140px;
-    background-color: #3264fe;
+    height: 230px;
+    background: linear-gradient(90deg, #3264fe, #5493fa);
     border-radius: 30px 0 0 30px;
     display: flex;
     justify-content: center;
@@ -272,8 +289,8 @@ section{
 
 .podio-ranking > .meio-podio{
     width: calc(100%/3);
-    height: 200px;
-    background-color: #3264fe;
+    height: 300px;
+    background: linear-gradient(90deg, #3264fe, #5493fa);
     border-radius: 30px 30px 0 0;
     display: flex;
     justify-content: center;
@@ -287,8 +304,8 @@ section{
 
 .podio-ranking > .direita-podio{
     width: calc(100%/3);
-    height: 100px;
-    background-color: #3264fe;
+    height: 180px;
+    background: linear-gradient(90deg, #3264fe, #5493fa);
     border-radius: 0 30px 30px 0 ;
     display: flex;
     justify-content: center;
@@ -340,7 +357,7 @@ th, td {
 }
 
 th {
-    background: linear-gradient(90deg, #3b82f6, #06b6d4);
+    background: linear-gradient(90deg, #3264fe, #5493fa);
     color: white;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -352,11 +369,12 @@ th:last-child {
 }
 
 tr:hover {
-    background: rgba(59, 130, 246, 0.1);
+    background: rgba(59, 130, 246, 0.3);
     transition: 0.3s;
 }
 
-/* COMEÇO FOOTER */
+/* fim footer */
+/* começo footer */
 
 footer{
     border-top: 3px solid #3264fe;
