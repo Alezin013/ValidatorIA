@@ -59,7 +59,7 @@ document.getElementById('file-form').addEventListener('submit', function(e) {
         resultDiv.textContent = 'Analisando com IA...';
 
         // Envia o conteúdo do arquivo para o backend IA
-        fetch('http://localhost:5000/api/ia-analyze', {
+        fetch('http://localhost:5500/api/ia-analyze', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
