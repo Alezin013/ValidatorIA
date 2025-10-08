@@ -10,8 +10,7 @@
 
 <body>
     <header>
-        <img src="" alt="">
-
+        <img src="" alt=""> <!-- AQUI VAMOS COLOCAR UMA IMG PRO NAV-->
         <nav>
             <ul>
                 <li><a href="#inicio">Inicio</a></li>
@@ -43,9 +42,10 @@
                 <!-- Novo campo para upload de arquivo -->
                 <form id="file-form">
                     <label for="file-input">Selecione um arquivo</label>
-                    <input type="file" id="file-input" accept=".html,.css,.js">
+                    <input type="file" id="file-input">
                     <button type="submit">Analisar</button>
                 </form>
+                <div id="result" class="result"></div>
             </div>
         </section>
         <section id="dashboard">
@@ -58,12 +58,14 @@
                 </article>
             </div>
             <div class="direita">
-
+                <!-- RANKING DE NOTAS -->
             </div>
         </section>
     </main>
     <footer>
-        <!-- botar um todos os direitos aos integrantes -->
+        <article>
+            <p>&copy;Todos os arquivos reservados a:</p>
+        </article>
     </footer>
 
 
