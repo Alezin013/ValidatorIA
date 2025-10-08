@@ -1,26 +1,70 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ValidatorIA - Validador de Código</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <header>
         <img src="" alt="">
+
         <nav>
-            
+            <ul>
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#validator">Validator</a></li>
+                <li><a href="#dashboard">Dashboard</a></li>
+            </ul>
         </nav>
+        <h3>&copy;Dev.404</h3>
     </header>
     <main>
-        <section>
+        <section id="inicio">
             <img src="" alt=""> <!-- imagem maneira-->
+            <article>
+                <h1>Bem-vindo ao T2S Validator</h1>
+                <p>
+                    Esta é a plataforma que usa Inteligência Artificial para avaliar automaticamente projetos de
+                    software. <br>
+                    Envie o link do seu repositório ou o caminho do seu projeto local e receba, em poucos minutos, <br>
+                    uma análise técnica completa, com notas e justificativas baseadas nos critérios do Desafio T2S.
+                </p>
+            </article>
         </section>
-        <section>
+        <section id="validator">
+            <div class="container">
+                <h1>ValidatorIA</h1>
+                <p>Valide seu código HTML, CSS ou JavaScript abaixo:</p>
+                <!-- Formulário tradicional -->
+                <hr>
+                <!-- Novo campo para upload de arquivo -->
+                <form id="file-form">
+                    <label for="file-input">Selecione um arquivo</label>
+                    <input type="file" id="file-input" accept=".html,.css,.js">
+                    <button type="submit">Analisar</button>
+                </form>
+            </div>
+        </section>
+        <section id="dashboard">
+            <div class="esquerda">
+                <article>
+                    <!-- Local onde vamos colocar a nota e o pq -->
+                </article>
+                <article>
+                    <!-- GRAFICO DE PIZZA obs: aprender a fazer isso-->
+                </article>
+            </div>
+            <div class="direita">
 
+            </div>
         </section>
     </main>
+    <footer>
+        <!-- botar um todos os direitos aos integrantes -->
+    </footer>
 
 
 
@@ -37,18 +81,7 @@
 
 
 
-    <div class="container">
-        <h1>ValidatorIA</h1>
-        <p>Valide seu código HTML, CSS ou JavaScript abaixo:</p>
-        <!-- Formulário tradicional -->
-        <hr>
-        <!-- Novo campo para upload de arquivo -->
-        <form id="file-form">
-            <label for="file-input">Selecione um arquivo</label>
-            <input type="file" id="file-input" accept=".html,.css,.js">
-            <button type="submit">Analisar</button>
-        </form>
-    </div>
+
     <div class="nota">
 
     </div>
@@ -56,9 +89,7 @@
         <!-- aqui vai aparecer um ranking de 1 a 10 onde no 11 lugar vai 
          aparecer exatamente onde esta o seu codigo -->
     </div>
-    <footer>
-
-    </footer>
     <script src="script.js"></script>
 </body>
+
 </html>
