@@ -5,12 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ValidatorIA - Validador de Código</title>
+    <link rel="icon" href="/FrontEnd/imgs/t2s.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <header>
-        <img src="/FrontEnd/imgs/t2s-mini.png" alt="Logo-T2S"> 
+        <img src="/FrontEnd/imgs/t2s-mini.png" alt="Logo-T2S">
         <nav>
             <ul>
                 <li><a href="#inicio">Inicio</a></li>
@@ -35,32 +37,39 @@
         </section>
         <section id="validator">
             <div class="container">
-                <h1>ValidatorIA</h1>
-                <p>Valide seu código HTML, CSS ou JavaScript abaixo:</p>
-                <!-- Formulário tradicional -->
-                <hr>
-                <!-- Novo campo para upload de arquivo -->
-                <form id="file-form">
-                    <label for="file-input">Selecione um arquivo</label>
-                    <input type="file" id="file-input">
-                    <button type="submit">Analisar</button>
-                </form>
-                <!-- FORM DO ALE FDP -->
 
-                <form id="validator-form">
-                    <textarea id="code-input" placeholder="Cole seu código aqui..." rows="12"></textarea>
-                    <div class="options">
-                        <label><input type="radio" name="type" value="html" checked> HTML</label>
-                        <label><input type="radio" name="type" value="css"> CSS</label>
-                        <label><input type="radio" name="type" value="js"> JavaScript</label>
-                    </div>
-                    <button type="submit">Validar</button>
-                </form>
+                <div class="esquerda-container">
+                    <!-- Formulário tradicional -->
+                    <!-- Novo campo para upload de arquivo -->
+                    <form id="file-form" class="form-select">
+                        <h2>Arraste ou faça <span>Upload</span> de um arquivo</h2>
+                        <label for="file-input">Fazer upload</label>
+                        <input type="file" id="file-input">
+                        <button type="submit">Fazer upload</button>
+                    </form>
 
-                <!-- FIM DO FORM DO ALE FDP -->
-                <div id="result" class="result"></div>
+                </div>
+                <!-- FORM DO ALE  -->
+
+                <div class="direita-container">
+                    <form id="validator-form" class="form-validator">
+                        <h1>ValidatorIA</h1>
+                        <p>Valide seu código HTML, CSS ou JavaScript abaixo:</p>
+                        <textarea id="code-input" placeholder="Cole seu código aqui..." rows="12"></textarea>
+                        <div class="options">
+                            <label><input type="radio" name="type" value="html" checked> HTML</label>
+                            <label><input type="radio" name="type" value="css"> CSS</label>
+                            <label><input type="radio" name="type" value="js"> JavaScript</label>
+                        </div>
+                        <button type="submit">Validar</button>
+                    </form>
+                    <div id="result" class="result"></div> <!-- definir atributos pra ela-->
+                </div>
+
+                <!-- FIM DO FORM DO ALE  -->
             </div>
         </section>
+       
         <section id="dashboard">
             <div class="esquerda">
                 <article>
@@ -78,7 +87,8 @@
     <footer>
         <p>&copy;Todos os arquivos reservados a:</p>
     </footer>
-    <script src="script.js"></script>
+    <script src="/FrontEnd/js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </body>
 
 </html>
