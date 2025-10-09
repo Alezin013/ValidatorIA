@@ -52,10 +52,18 @@ header > nav {
     align-items: center;
 }
 
-header > h3 {
+header > a {
     margin: 0;
     display: flex;
     align-items: center;
+    text-decoration: none;
+    color: #fff;
+    transition: font-size 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+header > a:hover{
+    font-size: larger;
+    color: #3264fe;
 }
 
 header > nav > ul {
@@ -495,7 +503,6 @@ tr:hover {
     transition: 0.3s;
 }
 
-/* fim footer */
 /* começo footer */
 
 footer{
@@ -525,3 +532,5 @@ footer > ul > li > a{
 footer > ul > li > a:hover{
     color: #3264fe;
 }
+
+/* fim footer */
