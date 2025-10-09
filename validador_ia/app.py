@@ -39,4 +39,6 @@ def validate_code():
         return jsonify({"error": str(e)}), 500
 
 if __name__ == "__main__":
-    app.run(port=5501, debug=True)
+    print("🚀 Iniciando servidor Flask...")
+    app.run(host="127.0.0.1", port=5501, debug=True)
+
