@@ -5,23 +5,22 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 // ==========================================================
-// 🧠 CONFIGURAÇÃO INICIAL
+// 🧠 CONFIGURAÇÃO INICIAL DO SERVIDOR ASP.NET
 // ==========================================================
 var builder = WebApplication.CreateBuilder(args);
 
-// 🔹 Define porta fixa (opcional, útil para evitar portas aleatórias)
+// 🔹 Define porta fixa
 builder.WebHost.UseUrls("http://localhost:5501");
 
-// 🔹 Permite leitura da chave do Gemini via User Secrets
-builder.Configuration.AddUserSecrets<Program>();
+// 🔹 Permite leitura da chave da API do Gemini via User Secrets
+builder.Configuration.AddUserSecrets(System.Reflection.Assembly.GetExecutingAssembly());
 
-// 🔹 Adiciona suporte a HttpClient (para chamadas à API do Gemini)
+// 🔹 Adiciona suporte a HttpClient (necessário para acessar a API do Gemini)
 builder.Services.AddHttpClient();
 
 // ==========================================================
@@ -30,99 +29,85 @@ builder.Services.AddHttpClient();
 var app = builder.Build();
 
 // ==========================================================
-// 🔧 CONFIGURA PIPELINE DE ROTEAMENTO
+// ✅ ENDPOINT: /validate
 // ==========================================================
-app.UseRouting();
-
-// ==========================================================
-// ✅ REGISTRA O ENDPOINT /validate
-// ==========================================================
-app.UseEndpoints(endpoints =>
+app.MapPost("/validate", async (HttpContext context, IHttpClientFactory httpFactory) =>
 {
-    endpoints.MapPost("/validate", async (HttpContext context, IHttpClientFactory httpFactory) =>
+    try
     {
-        try
+        // 🔸 Lê o corpo da requisição
+        using var reader = new StreamReader(context.Request.Body);
+        string code = await reader.ReadToEndAsync();
+
+        // 🔸 Obtém a chave da API Gemini (configure com: dotnet user-secrets set "Gemini:ApiKey" "SUA_CHAVE_AQUI")
+        var apiKey = builder.Configuration["Gemini:ApiKey"];
+        if (string.IsNullOrWhiteSpace(apiKey))
         {
-            // Lê o corpo da requisição
-            using var reader = new StreamReader(context.Request.Body);
-            string code = await reader.ReadToEndAsync();
+            context.Response.StatusCode = 500;
+            await context.Response.WriteAsync(JsonSerializer.Serialize(new { error = "⚠️ Chave da Gemini API não encontrada. Configure usando: dotnet user-secrets set \"Gemini:ApiKey\" \"SUA_CHAVE_AQUI\"" }));
+            return;
+        }
 
-            // Obtém a chave do Gemini
-            var apiKey = builder.Configuration["Gemini:ApiKey"];
-            if (string.IsNullOrWhiteSpace(apiKey))
+        // 🔸 Monta o prompt de análise
+        string prompt = $"Você é um avaliador rigoroso de código HTML, CSS e JavaScript. Analise este código e descreva erros, melhorias e boas práticas:\n\n{code}";
+
+        // 🔸 Cria o corpo da requisição para a API Gemini
+        var payload = new
+        {
+            contents = new[]
             {
-                context.Response.StatusCode = 500;
-                await context.Response.WriteAsync(JsonSerializer.Serialize(new { error = "⚠️ Chave da Gemini API não encontrada nos User Secrets." }));
-                return;
-            }
-
-            // Prompt enviado à IA Gemini
-            string prompt = $"Você é um avaliador rigoroso de código HTML, CSS e JavaScript. Analise este código e descreva erros, melhorias e boas práticas:\n\n{code}";
-
-            // Corpo da requisição para Gemini
-            var payload = new
-            {
-                contents = new[]
+                new
                 {
-                    new
+                    parts = new[]
                     {
-                        parts = new[]
-                        {
-                            new { text = prompt }
-                        }
+                        new { text = prompt }
                     }
                 }
-            };
-
-            // Converte para JSON e envia via POST
-            var json = JsonSerializer.Serialize(payload);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-
-            var url = $"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={apiKey}";
-
-            var client = httpFactory.CreateClient();
-            var response = await client.PostAsync(url, content);
-            var body = await response.Content.ReadAsStringAsync();
-
-            // Verifica sucesso
-            if (!response.IsSuccessStatusCode)
-            {
-                context.Response.StatusCode = (int)response.StatusCode;
-                await context.Response.WriteAsync(JsonSerializer.Serialize(new { error = $"Erro da Gemini API: {body}" }));
-                return;
             }
+        };
 
-            // Extrai o texto de resposta do Gemini
-            var doc = JsonDocument.Parse(body);
-            string result = doc.RootElement
-                .GetProperty("candidates")[0]
-                .GetProperty("content")
-                .GetProperty("parts")[0]
-                .GetProperty("text")
-                .GetString();
+        // 🔸 Serializa para JSON
+        var json = JsonSerializer.Serialize(payload);
+        var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-            // Retorna JSON ao cliente
-            context.Response.ContentType = "application/json";
-            await context.Response.WriteAsync(JsonSerializer.Serialize(new { result }));
-        }
-        catch (Exception ex)
+        // 🔸 Endpoint oficial da API Gemini
+        var url = $"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={apiKey}";
+
+        // 🔸 Envia requisição
+        var client = httpFactory.CreateClient();
+        var response = await client.PostAsync(url, content);
+        var body = await response.Content.ReadAsStringAsync();
+
+        // 🔸 Verifica se houve erro na resposta da API
+        if (!response.IsSuccessStatusCode)
         {
-            // Captura erros gerais
-            Console.WriteLine("Erro interno: " + ex.ToString());
-            context.Response.StatusCode = 500;
-            await context.Response.WriteAsync(JsonSerializer.Serialize(new { error = ex.Message }));
+            context.Response.StatusCode = (int)response.StatusCode;
+            await context.Response.WriteAsync(JsonSerializer.Serialize(new { error = $"Erro da Gemini API: {body}" }));
+            return;
         }
-    });
-});
 
-// ==========================================================
-// 🔍 LISTA DE ENDPOINTS REGISTRADOS (LOG DE DEBUG)
-// ==========================================================
-var ds = app.Services.GetRequiredService<EndpointDataSource>();
-foreach (var e in ds.Endpoints)
-{
-    Console.WriteLine("↪ " + e.DisplayName);
-}
+        // 🔸 Lê o texto retornado pela Gemini
+        var doc = JsonDocument.Parse(body);
+        if (!doc.RootElement.TryGetProperty("candidates", out var candidates))
+            throw new Exception("Resposta inesperada da Gemini API: " + body);
+
+        string result = candidates[0]
+            .GetProperty("content")
+            .GetProperty("parts")[0]
+            .GetProperty("text")
+            .GetString();
+
+        // 🔸 Retorna o resultado como JSON
+        context.Response.ContentType = "application/json";
+        await context.Response.WriteAsync(JsonSerializer.Serialize(new { result }));
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine("Erro interno: " + ex);
+        context.Response.StatusCode = 500;
+        await context.Response.WriteAsync(JsonSerializer.Serialize(new { error = ex.Message }));
+    }
+});
 
 // ==========================================================
 // 🟢 INICIA A APLICAÇÃO
