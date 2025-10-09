@@ -132,11 +132,18 @@ section{
     width: calc(40% - 15px);
     height: 100%;
     background-color: white;
+    border: 4px dashed #3264fe;
     border-radius: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
     box-shadow: rgba(149, 157, 165, 0.4) 0px 8px 24px;
+    transition: border 0.3s ease-in-out;
+}
+
+.esquerda-container.highlight {
+    border: 4px dashed #40c251;
+    border-radius: 30px;
 }
 
 .esquerda-container > form{
@@ -150,14 +157,19 @@ section{
 
 .esquerda-container > form > input[type="file"]{
     display: none;
-    
 }
 
 .esquerda-container > form span{
     color: #3264fe;
 }
 
-.esquerda-container >  form > label{
+.esquerda-container >  form > div {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.esquerda-container >  form > div > label{
     width: 200px;
     height: 40px;
     background-color: #3264fe;
@@ -169,26 +181,33 @@ section{
     align-items: center;
     border-radius: 8px;
     box-shadow: rgba(149, 157, 165, 0.4) 0px 8px 24px;
+    cursor: pointer;
 }
 
 .esquerda-container > form > button{
     background-color: #40c251;
     width: 200px;
     height: 40px;
+    cursor: pointer;
     border: none;    
     font-weight: bold;
     font-family: inherit;
     color: white;
     border-radius: 8px;
     box-shadow: rgba(149, 157, 165, 0.4) 0px 8px 24px;
+}
 
-
+.file-feedback {
+    margin-top: 15px;
+    font-weight: bold;
+    color: green;
 }
 
 .container > .direita-container{
     width: calc(60% - 15px);
     height: 100%;
     background-color: white;
+    border: 3px solid white;
     border-radius: 30px;
     box-shadow: rgba(149, 157, 165, 0.4) 0px 8px 24px;
     display: flex;
@@ -240,7 +259,6 @@ section{
     box-shadow: rgba(149, 157, 165, 0.4) 0px 8px 24px;
 }
 
-/* fim da main */
 /* começo do dashboard */
 
 #dashboard {

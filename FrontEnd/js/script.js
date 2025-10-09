@@ -1,3 +1,50 @@
+const form = document.querySelector('.esquerda-container'); // Alterado de ID para classe
+const fileInput = document.getElementById('file-input');
+const feedback = document.getElementById('file-feedback');
+
+// Evita comportamento padrão do navegador
+['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+    form.addEventListener(eventName, preventDefaults, false);
+});
+
+function preventDefaults(e) {
+    e.preventDefault();
+    e.stopPropagation();
+}
+
+// Adiciona destaque ao arrastar
+['dragenter', 'dragover'].forEach(eventName => {
+    form.addEventListener(eventName, () => {
+        form.classList.add('highlight');
+    }, false);
+});
+
+['dragleave', 'drop'].forEach(eventName => {
+    form.addEventListener(eventName, () => {
+        form.classList.remove('highlight');
+    }, false);
+});
+
+// Quando o arquivo é solto
+form.addEventListener('drop', (e) => {
+    const files = e.dataTransfer.files;
+    if (files.length > 0) {
+        fileInput.files = files;
+        showFeedback(files[0]);
+    }
+});
+
+// Quando o usuário escolhe um arquivo pelo botão
+fileInput.addEventListener('change', () => {
+    if (fileInput.files.length > 0) {
+        showFeedback(fileInput.files[0]);
+    }
+});
+
+// Função para mostrar o nome do arquivo
+function showFeedback(file) {
+    feedback.textContent = `✅ Arquivo "${file.name}" carregado com sucesso`;
+}
 
 // Validação tradicional do código colado no textarea
 document.getElementById('validator-form').addEventListener('submit', function(e) {
