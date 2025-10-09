@@ -108,6 +108,7 @@ app.UseEndpoints(endpoints =>
         catch (Exception ex)
         {
             // Captura erros gerais
+            Console.WriteLine("Erro interno: " + ex.ToString());
             context.Response.StatusCode = 500;
             await context.Response.WriteAsync(JsonSerializer.Serialize(new { error = ex.Message }));
         }
