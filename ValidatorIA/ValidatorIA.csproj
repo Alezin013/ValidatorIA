@@ -1,14 +1,43 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+  <!-- Projeto ASP.NET Core Web (usa endpoints HTTP, Swagger, etc.) -->
 
   <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <UserSecretsId>1fd890c2-4248-4f70-a8b9-11c3c844b142</UserSecretsId>
+    <TargetFramework>net9.0</TargetFramework> 
+    <!-- Versão do .NET usada pelo projeto -->
+
+    <Nullable>enable</Nullable> 
+    <!-- Ativa checagem de variáveis nulas -->
+
+    <ImplicitUsings>enable</ImplicitUsings> 
+    <!-- Importa namespaces padrão automaticamente -->
+
+    <UserSecretsId>1fd890c2-4248-4f70-a8b9-11c3c844b142</UserSecretsId> 
+    <!-- ID usado pelo User Secrets para armazenar a chave "Gemini:ApiKey" -->
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="OpenAI" Version="2.5.0" />
+    <!-- Swagger: gera documentação interativa da API -->
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+
+   <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.1" />
+   <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0" />
+
+
+    <!-- MediatR: implementa padrão Mediator (organiza lógica de negócio) -->
+    <PackageReference Include="MediatR" Version="12.0.1" />
+    
+
+    <!-- AutoMapper: mapeia objetos (ex: Entidade ↔ DTO) -->
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
+
+    <!-- Entity Framework Core: ORM para acesso a banco de dados -->
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.11" />
+
+    <!-- HttpClientFactory: usado para consumir a API do Gemini -->
+    <PackageReference Include="Microsoft.Extensions.Http" Version="9.0.0" />
+
+    <!-- UserSecrets: permite ler a chave "Gemini:ApiKey" com segurança -->
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="9.0.0" />
   </ItemGroup>
 
 </Project>
