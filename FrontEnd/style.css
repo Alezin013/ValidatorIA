@@ -111,6 +111,47 @@ section{
 #inicio {
     display: flex;
     flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#inicio > img{
+    height: 50%;
+}
+
+#inicio > article {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    align-items: center;
+    justify-content: center;
+}
+
+#inicio > article > h1 > span {
+    color: #3264fe;
+}
+
+#inicio > article > p {
+    text-align: justify;
+    font-weight: bold;
+    font-size: large;
+}
+
+#inicio > article > a {
+    background-color: #3264fe;
+    width: 200px;
+    height: 40px;
+    cursor: pointer;
+    border: none;    
+    font-weight: bold;
+    font-family: inherit;
+    color: white;
+    border-radius: 8px;
+    box-shadow: rgba(149, 157, 165, 0.4) 0px 8px 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
 }
 
 #validator{
