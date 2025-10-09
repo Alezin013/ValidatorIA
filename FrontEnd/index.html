@@ -38,7 +38,6 @@
         </section>
         <section id="validator">
             <div class="container">
-
                 <div class="esquerda-container">
                     <!-- Formulário tradicional -->
                     <!-- Novo campo para upload de arquivo -->
@@ -48,20 +47,13 @@
                         <input type="file" id="file-input">
                         <button type="submit">Analisar</button>
                     </form>
-
                 </div>
                 <!-- FORM DO ALE  -->
-
                 <div class="direita-container">
                     <form id="validator-form" class="form-validator">
                         <h1>ValidatorIA</h1>
-                        <p>Valide seu código HTML, CSS ou JavaScript abaixo:</p>
-                        <textarea id="code-input" placeholder="Cole seu código aqui..." rows="12"></textarea>
-                        <div class="options">
-                            <label><input type="radio" name="type" value="html" checked> HTML</label>
-                            <label><input type="radio" name="type" value="css"> CSS</label>
-                            <label><input type="radio" name="type" value="js"> JavaScript</label>
-                        </div>
+                        <p>Valide seu código abaixo:</p>
+                        <textarea id="code-input" placeholder="Cole a url do seu repositório aqui..." rows="12"></textarea>
                         <button type="submit">Validar</button>
                         <div id="result" class="result"></div> <!-- definir atributos pra ela-->
                     </form>
@@ -70,21 +62,28 @@
                 <!-- FIM DO FORM DO ALE  -->
             </div>
         </section>
-
         <section id="dashboard">
-            <div class="dashboard-div">
-                <article>
-                    <!-- Local onde vamos colocar a nota e o pq -->
-                </article>
-                <article class="graficos">
+            <article class="dash-text">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur voluptatibus maxime deleniti illo
+                    veritatis delectus rem. Alias cum laboriosam voluptate ut qui! Quia tempora libero repudiandae.
+                    Doloremque accusamus consectetur rerum!</p>
+            </article>
+            <article class="graficos">
+                <div class="cima">
+                    <p>balbankodnweoa</p>
+                    <div class="nota-final">
+                        <p>5,0</p>
+                    </div>
+                </div>
+                <div class="baixo">
                     <div class="grafico-pol">
-                        <canvas id="grafico-polar" style="width: 200px; height: 200px;"></canvas>
+                        <canvas id="grafico-polar"></canvas>
                     </div>
                     <div class="grafico-piz">
-                        <canvas id="grafico-pizza" style="width: 200px; height: 200px;"></canvas>
+                        <canvas id="grafico-pizza"></canvas>
                     </div>
-                </article>
-            </div>
+                </div>
+            </article>
         </section>
         <section id="ranking">
             <div class="ranking-container">
@@ -144,16 +143,18 @@
     <footer>
         <p>&copy;Todos os arquivos reservados a:</p>
         <ul>
-            <li><a href="https://www.linkedin.com/in/alexandre-bianchi-406914344/" target="_blank">Alexandre Bianchi</a></li>
+            <li><a href="https://www.linkedin.com/in/alexandre-bianchi-406914344/" target="_blank">Alexandre Bianchi</a>
+            </li>
             <li><a href="https://www.linkedin.com/in/filippo-di-giuseppe/" target="_blank">Filippo Di Giuseppe</a></li>
-            <li><a href="https://www.linkedin.com/in/luiz-fernando-ribeiro-lourenco/" target="_blank">Luiz Fernando</a></li>
-            <li><a href="https://www.linkedin.com/in/dev-matheussantos/?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAAE3esMoBIrsxi4KFnTqhwijx0jZptdKUDPA" target="_blank">Matheus Eduardo</a></li>
+            <li><a href="https://www.linkedin.com/in/luiz-fernando-ribeiro-lourenco/" target="_blank">Luiz Fernando</a>
+            </li>
+            <li><a href="https://www.linkedin.com/in/dev-matheussantos/?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAAE3esMoBIrsxi4KFnTqhwijx0jZptdKUDPA"
+                    target="_blank">Matheus Eduardo</a></li>
         </ul>
     </footer>
-    <script src="/FrontEnd/js/grafico-polar.js"></script>
-    <script src="/FrontEnd/js/grafico-pizza.js"></script>
-    <script src="/FrontEnd/js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/FrontEnd/js/graficos.js"></script>
+    <script src="/FrontEnd/js/script.js"></script>
 </body>
 
 </html>

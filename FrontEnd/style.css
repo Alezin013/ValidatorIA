@@ -211,7 +211,7 @@ section{
 
 .container > .direita-container > form > textarea{
     width: calc(65%);
-    height: 30%;
+    height: 15%;
     resize: none;
     border: none;
     border-radius: 15px;
@@ -242,6 +242,69 @@ section{
 
 /* fim da main */
 /* começo do dashboard */
+
+#dashboard {
+    display: flex;
+    justify-content: space-around;
+}
+
+#dashboard > .dash-text{
+    display: flex;
+    align-items: center;
+    text-align: justify;
+}
+
+#dashboard > .dash-text > p{
+    width: 60%;
+}
+
+#dashboard > article{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#dashboard > .graficos {
+    display: flex;
+    flex-direction: column;
+}
+
+#dashboard > .graficos > .cima {
+    height: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#dashboard > .graficos > .cima > .nota-final{
+    border: 10px solid #3264fe;
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #0B0F19;
+    font-size: 45px;
+}
+
+#dashboard > .graficos > .baixo {
+    height: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#dashboard > .graficos > .baixo > div{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+}
 
 /* fim do dashboard */
 /* começo do ranking */
