@@ -1,3 +1,5 @@
+
+// GRAFICOS
 const ctx = document.getElementById('grafico-pizza');
 
 new Chart(ctx, {
