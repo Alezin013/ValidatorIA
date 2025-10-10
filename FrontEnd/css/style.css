@@ -334,6 +334,15 @@ section{
     flex-direction: column;
 }
 
+#dashboard > article > div > p{
+    font-weight: bold;
+    font-size: larger;
+}
+
+textarea{
+    resize: none;
+}
+
 #resultContainer {
     display: flex;
     flex-direction: column;

@@ -429,6 +429,117 @@
     try { localStorage.setItem('polarRawData', JSON.stringify(Array.isArray(rawValues) ? rawValues : [])); } catch (e) { }
   }
 
+  // ==============================================
+  // UTIL: exibir relatório Markdown com copiar/baixar (escopo global)
+  // ==============================================
+  function showMarkdownReport(markdown, filename = 'TECH_REVIEW.md') {
+    // Always build a fresh report panel and replace the content of #resultContainer.
+    const resultContainer = document.getElementById('resultContainer');
+    const panel = document.createElement('div');
+    panel.style.marginTop = '8px';
+    panel.style.padding = '12px';
+    panel.style.border = '1px solid #ddd';
+    panel.style.background = '#fafafa';
+
+    const title = document.createElement('h3');
+    title.textContent = 'Relatório Markdown gerado';
+    panel.appendChild(title);
+
+    const textarea = document.createElement('textarea');
+    textarea.value = markdown;
+    textarea.style.width = '100%';
+    textarea.style.minHeight = '220px';
+    textarea.style.fontFamily = 'monospace';
+    textarea.style.fontSize = '13px';
+    textarea.style.whiteSpace = 'pre-wrap';
+    panel.appendChild(textarea);
+
+    const btns = document.createElement('div');
+    btns.style.marginTop = '8px';
+
+    const copyBtn = document.createElement('button');
+    copyBtn.textContent = 'Copiar Markdown';
+    copyBtn.style.marginRight = '8px';
+    copyBtn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(textarea.value);
+        copyBtn.textContent = 'Copiado!';
+        setTimeout(() => copyBtn.textContent = 'Copiar Markdown', 1500);
+      } catch (e) {
+        textarea.select();
+        document.execCommand('copy');
+        copyBtn.textContent = 'Copiado!';
+        setTimeout(() => copyBtn.textContent = 'Copiar Markdown', 1500);
+      }
+    });
+    btns.appendChild(copyBtn);
+
+    const downloadBtn = document.createElement('button');
+    downloadBtn.textContent = 'Baixar (.md)';
+    downloadBtn.addEventListener('click', () => {
+      const blob = new Blob([textarea.value], { type: 'text/markdown;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    });
+    btns.appendChild(downloadBtn);
+
+    panel.appendChild(btns);
+
+    // Replace #resultContainer content so only the markdown panel is visible there
+    if (resultContainer) {
+      resultContainer.innerHTML = '';
+      resultContainer.appendChild(panel);
+    } else {
+      // fallback: hide #result and append panel after it
+      const resultDiv = document.getElementById('result');
+      if (resultDiv && resultDiv.parentNode) {
+        resultDiv.style.display = 'none';
+        resultDiv.innerHTML = '';
+        resultDiv.parentNode.insertBefore(panel, resultDiv.nextSibling);
+      } else {
+        document.body.appendChild(panel);
+      }
+    }
+  }
+
+  // Ensure the dashboard result area exists and remove any markdown panel
+  function ensureResultArea() {
+    // remove markdown panel if present
+    const panel = document.getElementById('markdownReportContainer');
+    if (panel && panel.parentNode) panel.parentNode.removeChild(panel);
+
+    const resultContainer = document.getElementById('resultContainer');
+    if (!resultContainer) return;
+
+    // recreate the hint and result elements inside resultContainer
+    resultContainer.innerHTML = '';
+
+    let hint = document.getElementById('resultHint');
+    if (!hint) {
+      hint = document.createElement('p');
+      hint.id = 'resultHint';
+      hint.textContent = 'Aqui aparecerá o resultado da análise. Mantemos esse espaço reservado para evitar que o botão se mova.';
+      hint.style.width = '50%';
+      hint.style.textAlign = 'center';
+    }
+
+    let resultDiv = document.getElementById('result');
+    if (!resultDiv) {
+      resultDiv = document.createElement('div');
+      resultDiv.id = 'result';
+      resultDiv.className = 'result';
+    }
+
+    resultContainer.appendChild(hint);
+    resultContainer.appendChild(resultDiv);
+  }
+
   // Read and analyze a File object, update UI, ranking and polar chart
   function processUploadedFile(file) {
     const resultDiv = document.getElementById('result');
@@ -478,6 +589,11 @@
             const lastAnalysis = { nome: name, nota: scoreRounded, notes: notes, breakdown };
             localStorage.setItem('lastAnalysis', JSON.stringify(lastAnalysis));
           } catch (e) { console.warn('Erro ao salvar lastAnalysis', e); }
+          // generate markdown report for this file and show it
+          try {
+            const md = `# Análise local: ${name}\n\n**Nota:** ${scoreRounded} / 10\n\n**Resumo:**\n- ${notes.join('\n- ') || 'Sem observações'}\n\n**Detalhes do arquivo:**\n- Nome: ${file.name}\n- Linhas: ${lines}`;
+            showMarkdownReport(md, `${name.replace(/[^a-z0-9_-]/ig,'_')}-TECH_REVIEW.md`);
+          } catch (e) { console.warn('Erro ao gerar relatório markdown local', e); }
         } catch (e) { console.warn('Erro ao gerar breakdown do arquivo', e); }
       } catch (err) {
         console.error('Erro ao processar arquivo', err);
@@ -493,6 +609,7 @@
   // ==============================================
   document.getElementById('file-form').addEventListener('submit', function(e) {
     e.preventDefault();
+    ensureResultArea();
     const resultDiv = document.getElementById('result');
     if (!fileInput.files || fileInput.files.length === 0) {
       resultDiv.textContent = 'Selecione um arquivo para análise.';
@@ -522,6 +639,7 @@
   // ==============================================
   document.getElementById('validator-form').addEventListener('submit', function(e) {
     e.preventDefault();
+    ensureResultArea();
     const resultDiv = document.getElementById('result');
     const repoUrl = document.getElementById('code-input').value.trim();
 
@@ -571,6 +689,8 @@
 
           ranking.push({ nome: repoName, nota: data.score, addedAt: Date.now() });
           atualizarTabelaRanking();
+          // show the markdown report returned by the backend (if any)
+          try { if (data.markdown) showMarkdownReport(data.markdown, `${repoName.replace(/[^a-z0-9_-]/ig,'_')}-TECH_REVIEW.md`); } catch (e) { console.warn('Erro ao exibir markdown backend', e); }
           return;
         }
         // se backend respondeu mas com erro, cair para cliente
@@ -601,6 +721,8 @@
       const owner = m[1];
       const repo = m[2].replace(/\.git$/i, '');
 
+
+  // (duplicate local definition removed; single global showMarkdownReport exists above)
       const repoApi = `https://api.github.com/repos/${owner}/${repo}`;
       const contentsApi = `https://api.github.com/repos/${owner}/${repo}/contents`;
 
@@ -643,6 +765,8 @@
   const repoName = `${owner}/${repo}`;
   ranking.push({ nome: repoName, nota: scoreRounded, addedAt: Date.now() });
       atualizarTabelaRanking();
+  // show markdown report for client analysis
+  try { showMarkdownReport(markdown, `${repoName.replace(/[^a-z0-9_-]/ig,'_')}-TECH_REVIEW.md`); } catch (e) { console.warn('Erro ao exibir markdown cliente', e); }
     } catch (err) {
       console.error(err);
       resultDiv.textContent = 'Erro interno na análise cliente.';
