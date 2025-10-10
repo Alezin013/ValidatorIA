@@ -58,8 +58,7 @@
                         <h1>ValidatorIA</h1>
                         <p>Valide seu código abaixo:</p>
                         <textarea id="code-input" placeholder="Cole a url do seu repositório aqui..." rows="12"></textarea>
-                        <button type="submit">Validar</button>
-                        <div id="result" class="result"></div> <!-- definir atributos pra ela-->
+                        <a href="#dashboard"><button type="submit">Validar</button></a>                  
                     </form>
                 </div>
 
@@ -68,15 +67,14 @@
         </section>
         <section id="dashboard">
             <article class="dash-text">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur voluptatibus maxime deleniti illo
-                    veritatis delectus rem. Alias cum laboriosam voluptate ut qui! Quia tempora libero repudiandae.
-                    Doloremque accusamus consectetur rerum!</p>
+                <div id="result" class="result"></div> <!-- definir atributos pra ela-->       
+                <a href="#validator"><button type="submit">Validar Mais Arquivos</button></a>
             </article>
             <article class="graficos">
                 <div class="cima">
-                    <p>balbankodnweoa</p>
+                    <p>Nota do Arquivo Analisado:</p>
                     <div class="nota-final">
-                        <p>5,0</p>
+                        <div id="scoreBox" class="nota-value">-- / 10</div>
                     </div>
                 </div>
                 <div class="baixo">

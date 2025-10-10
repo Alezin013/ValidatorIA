@@ -281,8 +281,11 @@
         score += 0.5;
         notes.push('Possui referência a licença');
       }
-      const scoreRounded = Math.max(0, Math.min(10, Math.round(score * 10) / 10));
-      resultDiv.innerHTML = `<strong>Nota (análise local):</strong> ${scoreRounded} / 10<br><div style="margin-top:8px;white-space:pre-wrap">${notes.join('\n') || 'Sem observações'}</div>`;
+  const scoreRounded = Math.max(0, Math.min(10, Math.round(score * 10) / 10));
+  resultDiv.innerHTML = `<strong>Nota (análise local):</strong> ${scoreRounded} / 10<br><div style="margin-top:8px;white-space:pre-wrap">${notes.join('\n') || 'Sem observações'}</div>`;
+  // also update the global score display box if present
+  const scoreBox = document.getElementById('scoreBox');
+  if (scoreBox) scoreBox.textContent = `${scoreRounded} / 10`;
       resultDiv.style.background = '#e3f2fd';
       resultDiv.style.color = '#1565c0';
 
@@ -330,6 +333,9 @@
       .then(data => {
         if (data && data.success) {
           resultDiv.innerHTML = `<strong>Nota:</strong> ${data.score} / 10<br><div style="margin-top:8px;white-space:pre-wrap">${data.markdown}</div>`;
+          // update global box
+          const scoreBox = document.getElementById('scoreBox');
+          if (scoreBox) scoreBox.textContent = `${data.score} / 10`;
           resultDiv.style.background = '#e8f5e9';
           resultDiv.style.color = '#2e7d32';
 
@@ -396,10 +402,12 @@
       if (filesCount > 10) { score += 1.0; reasons.push('Repositório com muitos arquivos (bom sinal de projeto)'); }
       if (score > 10) score = 10;
       const scoreRounded = Math.round(score * 10) / 10;
+  const markdown = `# Análise (cliente): ${owner}/${repo}\n\n**Nota: ** ${scoreRounded} / 10\n\n**Resumo:**\n- ${reasons.join('\n- ') || 'Nenhuma característica positiva detectada.'}`;
 
-      const markdown = `# Análise (cliente): ${owner}/${repo}\n\n**Nota:** ${scoreRounded} / 10\n\n**Resumo:**\n- ${reasons.join('\n- ') || 'Nenhuma característica positiva detectada.'}`;
-
-      resultDiv.innerHTML = `<strong>Nota:</strong> ${scoreRounded} / 10<br><div style="margin-top:8px;white-space:pre-wrap">${markdown}</div>`;
+  resultDiv.innerHTML = `<strong>Nota: </strong> ${scoreRounded} / 10<br><div style="margin-top:8px;white-space:pre-wrap">${markdown}</div>`;
+  // update global score box
+  const scoreBox = document.getElementById('scoreBox');
+  if (scoreBox) scoreBox.textContent = `${scoreRounded} / 10`;
       resultDiv.style.background = '#e8f5e9';
       resultDiv.style.color = '#2e7d32';
 
