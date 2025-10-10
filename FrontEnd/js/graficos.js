@@ -1,16 +1,12 @@
-
-
-
-// GRAFICOS
 const ctx = document.getElementById('grafico-pizza');
 
-new Chart(ctx, {
-  type: 'pie',
+const lineChart = new Chart(ctx, {
+  type: 'line',
   data: {
-    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+    labels: ['Red', 'Blue', 'Yellow', 'Green'],
     datasets: [{
       label: '# of Votes',
-      data: [30, 19, 3, 5, 2, 3],
+      data: [30, 19, 3, 5],
       borderWidth: 1
     }]
   },
@@ -23,26 +19,4 @@ new Chart(ctx, {
   }
 });
 
-// GRAFICO PIZZA VAMOS COLOCAR A PORCENTAGEM DE QUANTO FOI USADO DE CADA LINGUAGEM
-// GRAFICO POLAR VAMOS COLOCAR A NOTA EM CADA LINGUAGEM
-
-const ctd = document.getElementById('grafico-polar');
-
-new Chart(ctd, {
-  type: 'polarArea',
-  data: {
-    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-    datasets: [{
-      label: '# of Votes',
-      data: [1, 10, 3, 5, 2, 3],
-      borderWidth: 1
-    }]
-  },
-  options: {
-    scales: {
-      y: {
-        beginAtZero: true
-      }
-    }
-  }
-});
+window.lineChart = lineChart;

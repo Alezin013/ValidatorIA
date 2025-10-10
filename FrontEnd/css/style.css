@@ -296,7 +296,7 @@ section{
     color: #3264fe;
 }
 
-.container > .direita-container > form > a > button{
+.container > .direita-container > form > button{
     background-color: #40c251;
     width: 200px;
     height: 40px;
@@ -330,7 +330,37 @@ section{
     width: 50%;
     height: 100%;
     display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+}
+
+#resultContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+#resultHint{
+    width: 50%;
+    text-align: center;
+}
+
+#dashboard > article > a{
+    background-color: #3264fe;
+    width: 200px;
+    height: 40px;
+    border: none;    
+    cursor: pointer;
+    font-weight: bold;
+    font-family: inherit;
+    color: white;
+    border-radius: 8px;
+    box-shadow: rgba(149, 157, 165, 0.4) 0px 8px 24px;
+    display: flex;
     justify-content: center;
+    align-items: center;
+    text-decoration: none;
 }
 
 #dashboard > .graficos {
@@ -363,7 +393,7 @@ section{
     height: 50%;
     width: 100%;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
 }
 
@@ -376,6 +406,18 @@ section{
 
 /* fim do dashboard */
 /* começo do ranking */
+
+.esquerda-podio, .meio-podio, .direita-podio {
+    display: flex;
+    flex-direction: column;
+}
+
+.esquerda-podio > div, .meio-podio > div, .direita-podio > div {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+}
 
 #ranking{
     background-color: transparent;
@@ -502,6 +544,25 @@ th:last-child {
 tr:hover {
     background: rgba(59, 130, 246, 0.3);
     transition: 0.3s;
+}
+
+.ranking-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin: 5px 0;
+}
+
+#clearRankingBtn {
+    background-color: #ff4646;
+    width: 150px;
+    height: 35px;
+    cursor: pointer;
+    border: none;    
+    font-weight: bold;
+    font-family: inherit;
+    color: white;
+    border-radius: 5px;
+    box-shadow: rgba(149, 157, 165, 0.4) 0px 8px 24px;
 }
 
 /* começo footer */

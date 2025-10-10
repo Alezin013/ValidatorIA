@@ -58,7 +58,7 @@
                         <h1>ValidatorIA</h1>
                         <p>Valide seu código abaixo:</p>
                         <textarea id="code-input" placeholder="Cole a url do seu repositório aqui..." rows="12"></textarea>
-                        <a href="#dashboard"><button type="submit">Validar</button></a>                  
+                        <button type="submit">Validar</button>           
                     </form>
                 </div>
 
@@ -67,8 +67,11 @@
         </section>
         <section id="dashboard">
             <article class="dash-text">
-                <div id="result" class="result"></div> <!-- definir atributos pra ela-->       
-                <a href="#validator"><button type="submit">Validar Mais Arquivos</button></a>
+                <div id="resultContainer">
+                    <p id="resultHint">Aqui aparecerá o resultado da análise. Mantemos esse espaço reservado para evitar que o botão se mova.</p>
+                    <div id="result" class="result"></div>
+                </div>
+                <a href="#validator">Validar Mais Arquivos</a>
             </article>
             <article class="graficos">
                 <div class="cima">
@@ -78,9 +81,6 @@
                     </div>
                 </div>
                 <div class="baixo">
-                    <div class="grafico-pol">
-                        <canvas id="grafico-polar"></canvas>
-                    </div>
                     <div class="grafico-piz">
                         <canvas id="grafico-pizza"></canvas>
                     </div>
@@ -91,13 +91,16 @@
             <div class="ranking-container">
                 <div class="podio-ranking">
                     <div class="esquerda-podio">
+                        <div class="podio-name podio-2">--</div>
                         <i class="fa-solid fa-trophy"></i>
                     </div> <!-- colocar icone dos trofeus-->
                     <div class="meio-podio">
+                        <div class="podio-name podio-1">--</div>
                         <i class="fa-solid fa-trophy"></i>
                     </div>
                     <div class="direita-podio">
-                        <i class="fa-solid fa-trophy"></i>
+                        <div class="podio-name podio-3">--</div>
+                        <i class="fa-solid fa-trophy"></i>     
                     </div>
                 </div>
                 <div class="ranking-direita">
@@ -113,6 +116,9 @@
                             <!-- linhas geradas dinamicamente -->
                         </tbody>
                     </table>
+                    <div class="ranking-actions">
+                        <button id="clearRankingBtn" class="btn-clear">Limpar ranking</button>
+                    </div>
                 </div>
             </div>
         </section>
